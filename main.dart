@@ -1,78 +1,85 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
-  runApp(const myApp());
+  runApp(MaterialApp(
+    home: Scaffold(
+      backgroundColor: Colors.deepPurple,
+      appBar: AppBar(
+        title: const Text(
+          'Dice',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+      body: const DicePage(),
+    ),
+  ));
 }
 
-class myApp extends StatelessWidget {
-  const myApp({super.key});
+class DicePage extends StatefulWidget {
+  const DicePage({Key? key}) : super(key: key);
+
+  @override
+  State<DicePage> createState() => _DicePageState();
+}
+
+class _DicePageState extends State<DicePage> {
+  int topButton = 1; // Default value for top dice side
+  int bottomButton = 1; // Default value for bottom dice side
+  int leftButton = 1; // Default value for left dice side
+  int rightButton = 1; // Default value for right dice side
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-        backgroundColor: Colors.teal,
-        body: SafeArea(
-         child: Container(
-          child: Column(
-           mainAxisAlignment: MainAxisAlignment.center,
-           children: [
-            const CircleAvatar(
-            backgroundColor: Colors.red,
-            radius: 70.0,
-            backgroundImage: AssetImage('assets/images/Avatar.jpg'),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    topButton = Random().nextInt(6) + 1; // Roll top dice side
+                  });
+                },
+                child: Image.asset('images/dice$topButton.png'), // Show top dice side image
+              ),
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    bottomButton = Random().nextInt(6) + 1; // Roll bottom dice side
+                  });
+                },
+                child: Image.asset('images/dice$bottomButton.png'), // Show bottom dice side image
+              ),
+            ],
           ),
-           const Text(
-            'Damilare Adeyemi',
-             style: TextStyle(
-              color: Colors.white,
-              fontSize: 30.0,
-              fontFamily: 'Pacifico',
-              fontWeight: FontWeight.bold,
-            ),
-           ),
-           const Text(
-            'Flutter Developer',
-             style: TextStyle(
-              color: Colors.white,
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold),
-           ),
-           Container(
-            color: Colors.white,
-            margin: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
-            padding: const EdgeInsets.all(15.0),
-            child: const Row(
-             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-             children: [
-              Icon(Icons.phone, color: Colors.teal, size: 30.0,),
-              Text('+234 816 2957 056')
-           ]
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    leftButton = Random().nextInt(6) + 1; // Roll left dice side
+                  });
+                },
+                child: Image.asset('images/dice$leftButton.png'), // Show left dice side image
+              ),
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    rightButton = Random().nextInt(6) + 1; // Roll right dice side
+                  });
+                },
+                child: Image.asset('images/dice$rightButton.png'), // Show right dice side image
+              ),
+            ],
           ),
-         ),
-         const SizedBox(
-          height: 10.0,
-         ),
-         Container(
-          color: Colors.white,
-          margin:const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
-          padding:const EdgeInsets.all(15.0),
-          child:const Row(
-           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-           children: [
-            Icon(
-                Icons.email,
-                color: Colors.teal,
-            ),
-            Text('dict@tau.edu.ng')
-           ],
-          ),
-         )
         ],
-       ),
       ),
-     ),
-    ),
-   );
+    );
   }
- }
+}
+
