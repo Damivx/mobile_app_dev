@@ -10,6 +10,7 @@ void main() {
           'Dice',
           style: TextStyle(color: Colors.white),
         ),
+        backgroundColor: Colors.deepPurple,
       ),
       body: const DicePage(),
     ),
@@ -29,6 +30,15 @@ class _DicePageState extends State<DicePage> {
   int leftButton = 1; // Default value for left dice side
   int rightButton = 1; // Default value for right dice side
 
+  void rollDice() {
+    setState(() {
+      topButton = Random().nextInt(6) + 1; // Roll top dice side
+      bottomButton = Random().nextInt(6) + 1; // Roll bottom dice side
+      leftButton = Random().nextInt(6) + 1; // Roll left dice side
+      rightButton = Random().nextInt(6) + 1; // Roll right dice side
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -38,42 +48,34 @@ class _DicePageState extends State<DicePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextButton(
-                onPressed: () {
-                  setState(() {
-                    topButton = Random().nextInt(6) + 1; // Roll top dice side
-                  });
-                },
-                child: Image.asset('images/dice$topButton.png'), // Show top dice side image
+              Expanded(
+                child: TextButton(
+                  onPressed: rollDice,
+                  child: Image.asset('assets/images/dice$topButton.png'), // Show top dice side image
+                ),
               ),
-              TextButton(
-                onPressed: () {
-                  setState(() {
-                    bottomButton = Random().nextInt(6) + 1; // Roll bottom dice side
-                  });
-                },
-                child: Image.asset('images/dice$bottomButton.png'), // Show bottom dice side image
+              Expanded(
+                child: TextButton(
+                  onPressed: rollDice,
+                  child: Image.asset('assets/images/dice$bottomButton.png'), // Show bottom dice side image
+                ),
               ),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextButton(
-                onPressed: () {
-                  setState(() {
-                    leftButton = Random().nextInt(6) + 1; // Roll left dice side
-                  });
-                },
-                child: Image.asset('images/dice$leftButton.png'), // Show left dice side image
+              Expanded(
+                child: TextButton(
+                  onPressed: rollDice,
+                  child: Image.asset('assets/images/dice$leftButton.png'), // Show left dice side image
+                ),
               ),
-              TextButton(
-                onPressed: () {
-                  setState(() {
-                    rightButton = Random().nextInt(6) + 1; // Roll right dice side
-                  });
-                },
-                child: Image.asset('images/dice$rightButton.png'), // Show right dice side image
+              Expanded(
+                child: TextButton(
+                  onPressed: rollDice,
+                  child: Image.asset('assets/images/dice$rightButton.png'), // Show right dice side image
+                ),
               ),
             ],
           ),
@@ -82,4 +84,3 @@ class _DicePageState extends State<DicePage> {
     );
   }
 }
-
